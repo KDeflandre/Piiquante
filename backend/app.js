@@ -24,19 +24,11 @@ app.use((req, res, next) => {
     next();
   });
 
-//   app.use(async (req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", '*')
-//     res.header("Access-Control-Allow-Credentials", true)
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-//     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
-//     next()
-// })
-
 //body-parser d'express. Permet de lire le contenu JSON renvoyé par les requêtes POST
 app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/sauce', sauceRoutes);
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
 

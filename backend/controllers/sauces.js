@@ -1,15 +1,18 @@
+const Sauce = require('../models/Sauce');
+const fs = require('fs'); 
+
 exports.getSauce = (req, res, next) => {
   Sauce.find()
   .then(sauces => res.status(200).json(sauces))
   .catch(error => res.status(400).json({error}));  
-  console.log('Sauce récupérée'); 
+  console.log('Sauce récup'); 
 };
 
 exports.getSauceId = (req, res, next) => {
   Sauce.findOne({_id: req.params.id})
   .then(sauces => res.status(200).json(sauces))
   .catch(error => res.status(400).json({error}));  
-  console.log('Sauce particulière récupérée'); 
+  console.log('Sauce spé récup'); 
 };
 
 exports.createSauce = (req, res, next) => {
@@ -22,7 +25,7 @@ exports.createSauce = (req, res, next) => {
   sauce.save()
   .then(() => res.status(201).json({message: "Sauce ajoutée"}))
   .catch(error => res.status(400).json({error}));
-  console.log('Sauce initialisée');
+  console.log('Sauce ajoutée');
 };
 
 exports.modifySauce = (req, res ,next) => {
