@@ -12,10 +12,9 @@ const SauceSchema = mongoose.Schema({
   dislikes : { type: Number, default: 0 },
   usersLiked : { type: [String] },
   usersDisliked : { type: [String] },
-  
 }, 
 {
-  versionKey : '_somethingElse'
+  versionKey : false
 });
 
 
