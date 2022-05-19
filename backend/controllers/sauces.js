@@ -54,7 +54,77 @@ exports.deleteSauce = (req, res, next) => {
   .catch(error => res.status(500).json({error}));
 };
 
-// exports.likeSauce = (req, res, next) => {
-//   if 
-// };
+// Like et Dislike les sauces + annuler son vote
+exports.likeSauce = (req, res, next) => {
+  
+  //Recup de la sauce avec params.id
+  Sauce.findOne({ _id: req.params.id })
+    .then((sauce) => {
+      console.log("Infos sauce");
+      console.log(sauce);
+
+      // Like
+      if (req.body.like === 1) {
+        if (!sauce.usersLiked.includes(req.body.userId)) {
+    
+          // MAJ BDD
+          Sauce.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { likes: 1 },
+              $push: { usersLiked : req.body.userId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "Sauce liké ! " }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+
+        // Dislike
+      } else if (req.body.like === -1) {
+        if (!sauce.usersDisliked.includes(req.body.userId)) {
+          
+          // MAJ BDD
+          Sauce.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { dislikes: 1 },
+              $push: { usersDisliked: req.body.userId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "Vous n'appreciez pas cette sauce ? " }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+      } else if (req.body.like === 0) {
+        
+        // Take off Like / Dislike
+        if (sauce.usersLiked.includes(req.body.userId)) {
+          
+          // MAJ BDD
+          Sauce.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { likes: -1 },
+              $pull: { usersLiked: req.body.userId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "Pas encore testé cette sauce ?" }))
+            .catch((error) => res.status(400).json({ error }));
+        
+          } else if (sauce.usersDisliked.includes(req.body.userId)) {
+          
+          // MAJ BDD
+          Sauce.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { dislikes: -1 },
+              $pull: { usersDisliked: req.body.userId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "Pas encore testé cette sauce ?" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+      }
+    })
+    .catch((error) => res.status(404).json({ error }));
+};
 

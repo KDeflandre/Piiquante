@@ -13,6 +13,11 @@ const SauceSchema = mongoose.Schema({
   usersLiked : { type: [String] },
   usersDisliked : { type: [String] },
   
+}, 
+{
+  versionKey : '_somethingElse'
 });
+
+
 
 module.exports = mongoose.model('Sauce', SauceSchema);
