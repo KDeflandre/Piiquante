@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
-//const Sauce = require('./models/Sauce');
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
