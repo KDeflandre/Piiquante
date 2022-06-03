@@ -10,3 +10,8 @@ images/.
 backend/images/ 
 images/ 
 / 
+
+
+*
+*/
+!.gitignore
