@@ -1,17 +1,13 @@
-../
-images/
 
-\images
-
-\.
-images/.
-.
-
-backend/images/ 
-images/ 
-/ 
 
 
 *
 */
 !.gitignore
+
+
+# exclude everything
+images/*
+
+# exception to the rule
+images/.gitkeep 
