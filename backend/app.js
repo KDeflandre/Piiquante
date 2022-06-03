@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
-// require('dotenv').config({ debug: true })
-// console.log(process.env)
 const dotenv = require('dotenv');
 dotenv.config();
 
